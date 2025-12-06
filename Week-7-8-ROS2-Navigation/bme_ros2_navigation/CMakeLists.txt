@@ -29,6 +29,7 @@ install(DIRECTORY
   rviz
   urdf
   meshes
+  models
   config
   maps
   DESTINATION share/${PROJECT_NAME}
