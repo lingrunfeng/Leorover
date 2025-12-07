@@ -21,7 +21,7 @@ sudo apt install ros-jazzy-interactive-marker-twist-server
 ### 2. 编译工作空间
 
 ```bash
-cd ~/aleorover
+cd ~/Leorover
 colcon build
 source install/setup.bash
 ```
@@ -37,7 +37,7 @@ source install/setup.bash
 #### 终端 1：启动 Gazebo 和机器人
 
 ```bash
-cd ~/aleorover
+cd ~/Leorover
 source install/setup.bash
 ros2 launch bme_ros2_navigation spawn_robot.launch.py
 ```
@@ -47,7 +47,7 @@ ros2 launch bme_ros2_navigation spawn_robot.launch.py
 #### 终端 2：启动 SLAM 和导航（包含 RViz）
 
 ```bash
-cd ~/aleorover
+cd ~/Leorover
 source install/setup.bash
 ros2 launch bme_ros2_navigation navigation_with_slam.launch.py
 ```
@@ -95,7 +95,7 @@ ros2 launch bme_ros2_navigation navigation_with_slam.launch.py rviz:=false
 #### 终端 1：启动 Gazebo 和机器人
 
 ```bash
-cd ~/aleorover
+cd ~/Leorover
 source install/setup.bash
 ros2 launch bme_ros2_navigation spawn_robot.launch.py
 ```
@@ -103,7 +103,7 @@ ros2 launch bme_ros2_navigation spawn_robot.launch.py
 #### 终端 2：启动定位和导航（包含 RViz）
 
 ```bash
-cd ~/aleorover
+cd ~/Leorover
 source install/setup.bash
 ros2 launch bme_ros2_navigation navigation.launch.py
 ```
@@ -129,7 +129,7 @@ ros2 launch bme_ros2_navigation navigation.launch.py
 
 地图文件保存在：
 ```
-~/aleorover/Week-7-8-ROS2-Navigation/bme_ros2_navigation/maps/
+~/Leorover/Week-7-8-ROS2-Navigation/bme_ros2_navigation/maps/
 ```
 
 ---
@@ -143,7 +143,7 @@ ros2 launch bme_ros2_navigation navigation.launch.py
 #### 终端 1：启动 Gazebo 和机器人
 
 ```bash
-cd ~/aleorover
+cd ~/Leorover
 source install/setup.bash
 ros2 launch bme_ros2_navigation spawn_robot.launch.py
 ```
@@ -151,7 +151,7 @@ ros2 launch bme_ros2_navigation spawn_robot.launch.py
 #### 终端 2：启动键盘控制
 
 ```bash
-cd ~/aleorover
+cd ~/Leorover
 source install/setup.bash
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ```
@@ -203,7 +203,7 @@ CTRL-C to quit
 如果需要可视化，可以在第三个终端启动：
 
 ```bash
-cd ~/aleorover
+cd ~/Leorover
 source install/setup.bash
 ros2 launch bme_ros2_navigation spawn_robot.launch.py
 # 然后在另一个终端

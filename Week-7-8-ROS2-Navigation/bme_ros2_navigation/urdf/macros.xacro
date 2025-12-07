@@ -315,6 +315,40 @@
       </visual>
     </link>
 
+    <!-- Arm Mount Link for MyCobot -->
+    <link name="${link_prefix}mycobot_arm_mount_link">
+      <inertial>
+        <mass value="0.01"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia
+            ixx="1e-6" ixy="0" ixz="0"
+            iyy="1e-6" iyz="0"
+            izz="1e-6"
+        />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.01 0.01 0.01"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <joint name="${joint_prefix}arm_mount_joint" type="fixed">
+      <origin xyz="0.0 0.0 0.15" rpy="0 0 0"/>
+      <parent link="${link_prefix}base_link"/>
+      <child link="${link_prefix}mycobot_arm_mount_link"/>
+    </joint>
+
+    <!-- Include MyCobot Arm -->
+    <xacro:include filename="$(find bme_ros2_navigation)/urdf/mycobot/mycobot_280_arm.urdf.xacro"/>
+    <xacro:mycobot_280_arm 
+      base_link="arm_mount_link" 
+      flange_link="link6_flange" 
+      prefix="${link_prefix}mycobot_">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:mycobot_280_arm>
+
   </xacro:macro>
 
   <!-- LEO GAZEBO -->
