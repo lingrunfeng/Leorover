@@ -286,7 +286,7 @@
 
     <!-- Lidar -->
     <joint name="${joint_prefix}scan_joint" type="fixed">
-      <origin xyz="0.0 0 0.0" rpy="0 0 0"/>
+      <origin xyz="0.0 0 0.02" rpy="0 -0.035 0"/>
       <child link="${link_prefix}scan_link"/>
       <parent link="${link_prefix}base_link"/>
     </joint>
@@ -598,7 +598,7 @@
             </horizontal>
           </scan>
           <range>
-            <min>0.25</min>
+            <min>0.10</min>
             <max>10.0</max>
             <resolution>0.01</resolution>
           </range>
