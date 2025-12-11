@@ -32,7 +32,15 @@ install(DIRECTORY
   models
   config
   maps
+  scripts
   DESTINATION share/${PROJECT_NAME}
+)
+
+# Install Python scripts with executable permissions
+install(PROGRAMS
+  scripts/arm_hold_pose.py
+  scripts/arm_coordinate_controller.py
+  DESTINATION lib/${PROJECT_NAME}
 )
 
 ament_package()

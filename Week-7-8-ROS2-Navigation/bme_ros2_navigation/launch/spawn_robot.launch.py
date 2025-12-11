@@ -1,7 +1,7 @@
 import os
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
-from launch.conditions import IfCondition
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, ExecuteProcess
+from launch.conditions import IfCondition, UnlessCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution, Command
 from launch_ros.actions import Node
@@ -193,6 +193,52 @@ def generate_launch_description():
         parameters=[interactive_marker_config_file_path],
         output='screen',
     )
+    
+    
+    # Path to controller config
+    controller_config_path = os.path.join(
+        get_package_share_directory('bme_ros2_navigation'),
+        'config',
+        'mycobot_controllers.yaml'
+    )
+    
+    # Controller spawner for joint_state_broadcaster
+    joint_state_broadcaster_spawner = Node(
+        package='controller_manager',
+        executable='spawner',
+        arguments=['joint_state_broadcaster', '--controller-manager', '/controller_manager',
+                  '--param-file', controller_config_path],
+        parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}],
+    )
+    
+    # Controller spawner for arm_controller
+    arm_controller_spawner = Node(
+        package='controller_manager',
+        executable='spawner',
+        arguments=['arm_controller', '--controller-manager', '/controller_manager',
+                  '--param-file', controller_config_path],
+        parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}],
+    )
+    
+    # Arm hold pose node - keeps arm in fixed upright position
+    # To use coordinate control mode instead, comment this out and uncomment the next node
+    arm_hold_pose_node = Node(
+        package='bme_ros2_navigation',
+        executable='arm_hold_pose.py',
+        name='arm_hold_pose',
+        output='screen',
+        parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}],
+    )
+    
+    # Arm coordinate controller node - for grasp testing
+    # Uncomment this when testing coordinate-based grasping
+    # arm_coordinate_controller_node = Node(
+    #     package='bme_ros2_navigation',
+    #     executable='arm_coordinate_controller.py',
+    #     name='arm_coordinate_controller',
+    #     output='screen',
+    #     parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}],
+    # )
 
     launchDescriptionObject = LaunchDescription()
 
@@ -214,5 +260,10 @@ def generate_launch_description():
     launchDescriptionObject.add_action(trajectory_node)
     launchDescriptionObject.add_action(ekf_node)
     #launchDescriptionObject.add_action(interactive_marker_twist_server_node)
+    launchDescriptionObject.add_action(joint_state_broadcaster_spawner)
+    launchDescriptionObject.add_action(arm_controller_spawner)
+    launchDescriptionObject.add_action(arm_hold_pose_node)
+    # Uncomment next line when testing coordinate control:
+    # launchDescriptionObject.add_action(arm_coordinate_controller_node)
 
     return launchDescriptionObject

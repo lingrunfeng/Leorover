@@ -219,5 +219,73 @@
     <xacro:material_visual ref_link="${prefix}link6" ambient="1 1 1 1" diffuse="1 1 1 1" specular="1 1 1 1"/>
     <xacro:material_visual ref_link="${prefix}${flange_link}" ambient="0.5 0.5 0.5 1" diffuse="0.5 0.5 0.5 1" specular="0.5 0.5 0.5 1"/>
 
+    <!-- ros2_control configuration -->
+    <ros2_control name="${prefix}mycobot_arm" type="system">
+      <hardware>
+        <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+      </hardware>
+      
+      <joint name="${prefix}link1_to_${prefix}link2">
+        <command_interface name="position">
+          <param name="min">-2.879793</param>
+          <param name="max">2.879793</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+      </joint>
+      
+      <joint name="${prefix}link2_to_${prefix}link3">
+        <command_interface name="position">
+          <param name="min">-2.879793</param>
+          <param name="max">2.879793</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+      </joint>
+      
+      <joint name="${prefix}link3_to_${prefix}link4">
+        <command_interface name="position">
+          <param name="min">-2.879793</param>
+          <param name="max">2.879793</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+      </joint>
+      
+      <joint name="${prefix}link4_to_${prefix}link5">
+        <command_interface name="position">
+          <param name="min">-2.879793</param>
+          <param name="max">2.879793</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+      </joint>
+      
+      <joint name="${prefix}link5_to_${prefix}link6">
+        <command_interface name="position">
+          <param name="min">-2.879793</param>
+          <param name="max">2.879793</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+      </joint>
+      
+      <joint name="${prefix}link6_to_${prefix}${flange_link}">
+        <command_interface name="position">
+          <param name="min">-3.05</param>
+          <param name="max">3.05</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+      </joint>
+    </ros2_control>
+
+    <!-- Gazebo ros2_control plugin -->
+    <gazebo>
+      <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+        <parameters>$(find bme_ros2_navigation)/config/mycobot_controllers.yaml</parameters>
+      </plugin>
+    </gazebo>
+
   </xacro:macro>
 </robot>

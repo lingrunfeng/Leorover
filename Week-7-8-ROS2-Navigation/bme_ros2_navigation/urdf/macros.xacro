@@ -335,7 +335,7 @@
     </link>
 
     <joint name="${joint_prefix}arm_mount_joint" type="fixed">
-      <origin xyz="0.08 0.0 0.0" rpy="0 0 0"/>
+      <origin xyz="0.08 0.0 0.06" rpy="0 0 0"/>
       <parent link="${link_prefix}base_link"/>
       <child link="${link_prefix}mycobot_arm_mount_link"/>
     </joint>
