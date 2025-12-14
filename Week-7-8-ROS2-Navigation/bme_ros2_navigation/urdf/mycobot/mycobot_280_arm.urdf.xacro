@@ -45,7 +45,7 @@
         <geometry>
           <mesh filename="package://bme_ros2_navigation/meshes/mycobot_280/visual/link1.dae"/>
         </geometry>
-        <origin xyz="0.0 0 0" rpy="0 0 ${-pi/2}"/>
+        <origin xyz="0.0 0 0" rpy="0 0 ${-pi}"/>
       </visual>
       <collision>
         <geometry>
