@@ -22,7 +22,15 @@ class ArmHoldPoseNode(Node):
         
         # 定义向上折叠的安全姿态 (避开雷达扫描平面)
         # 关节顺序: link1-2, link2-3, link3-4, link4-5, link5-6, link6-flange
-        self.safe_pose = [0.0, -1.57, 1.57, 0.0, 1.57, 0.0]
+        self.safe_pose = [
+                     0.0,        # joint1: base，不转
+                     -1.5,        # joint2: 大臂前伸（不是完全向上）
+                     0.5,        # joint3: 小臂向前
+                     0.0,        # joint4
+                     0.0,       # joint5: 让末端朝下
+                     0.0         # joint6
+                      ]
+
         
         self.get_logger().info('机械臂保持姿态节点已启动')
         self.get_logger().info(f'目标姿态: {self.safe_pose}')

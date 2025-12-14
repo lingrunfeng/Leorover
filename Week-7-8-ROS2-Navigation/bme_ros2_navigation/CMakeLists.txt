@@ -40,6 +40,7 @@ install(DIRECTORY
 install(PROGRAMS
   scripts/arm_hold_pose.py
   scripts/arm_coordinate_controller.py
+  scripts/send_grasp_target.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

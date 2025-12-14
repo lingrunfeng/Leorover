@@ -220,6 +220,15 @@ def generate_launch_description():
         parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}],
     )
     
+    # Controller spawner for gripper_action_controller
+    gripper_controller_spawner = Node(
+        package='controller_manager',
+        executable='spawner',
+        arguments=['gripper_action_controller', '--controller-manager', '/controller_manager',
+                  '--param-file', controller_config_path],
+        parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}],
+    )
+    
     # Arm hold pose node - keeps arm in fixed upright position
     # To use coordinate control mode instead, comment this out and uncomment the next node
     arm_hold_pose_node = Node(
@@ -262,7 +271,8 @@ def generate_launch_description():
     #launchDescriptionObject.add_action(interactive_marker_twist_server_node)
     launchDescriptionObject.add_action(joint_state_broadcaster_spawner)
     launchDescriptionObject.add_action(arm_controller_spawner)
-    launchDescriptionObject.add_action(arm_hold_pose_node)
+    launchDescriptionObject.add_action(gripper_controller_spawner)
+    # launchDescriptionObject.add_action(arm_hold_pose_node)  # Disabled for MTC compatibility
     # Uncomment next line when testing coordinate control:
     # launchDescriptionObject.add_action(arm_coordinate_controller_node)
 

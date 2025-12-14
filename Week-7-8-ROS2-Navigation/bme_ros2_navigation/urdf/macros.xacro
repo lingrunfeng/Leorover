@@ -349,6 +349,14 @@
       <origin xyz="0 0 0" rpy="0 0 0"/>
     </xacro:mycobot_280_arm>
 
+    <!-- Include Adaptive Gripper -->
+    <xacro:include filename="$(find mycobot_description)/urdf/mech/adaptive_gripper.urdf.xacro"/>
+    <xacro:adaptive_gripper
+      parent="link6_flange"
+      prefix="${link_prefix}mycobot_">
+      <origin xyz="0 0 0.034" rpy="1.5708 0 0"/>
+    </xacro:adaptive_gripper>
+
   </xacro:macro>
 
   <!-- LEO GAZEBO -->
